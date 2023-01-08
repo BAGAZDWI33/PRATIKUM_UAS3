@@ -84,11 +84,12 @@ berikut code java untuk Pemanggilan Call Phone
 
 dari code diatas dapat kita gunakan untuk melakukan scan barqode memanggil langsung pemilik nomer hp terkait 
 berikut barqode yang telah saya buat untuk praktek project PHONE
+![qr-code Telephon](https://user-images.githubusercontent.com/92739297/211197713-4cd7f883-858b-4c7e-adf5-3fd6e9cb7ce8.png)
 
- 
+kegiatan saat melakukan scan barqode 
 ![Screenshot_PHONE_QRCode](https://user-images.githubusercontent.com/92739297/211197351-0ff31fbb-2ba2-4140-b348-646e2c62e672.jpg)
 
-saat saya melakukan scan pada barqode diatas, maka akan menghasilkan 
+saat saya melakukan scan pada barqode diatas, maka akan menghasilkan  
 
  
 ![Screenshot_Hasil dari scan PHONE](https://user-images.githubusercontent.com/92739297/211197391-d2743b65-575d-4d84-aacc-8d1154bcbc8f.jpg)
@@ -96,6 +97,43 @@ saat saya melakukan scan pada barqode diatas, maka akan menghasilkan
 itu tampil secara langsung cepat dan tepat sesuai isi barqode yang saya buat.
 
 maka dari hasil diatas, code java PHONE yang saya buat sukses dan tidak terjadi error.
+ 
+## 4.FUNGSI MAPS
+Dilakukan untuk pemanggilan lokasi yang tepat dan akurat sesuai apa yang pengguna scan, dengan barqode lokasi yang dituju 
+
+berikut code java MAPs
+
+// MAPS
+            else if (result.getContents().startsWith("geo:")) {
+                // Barcode merupakan koordinat
+                Intent mapsIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(result.getContents()));
+                mapsIntent.setPackage("com.google.android.apps.maps");
+                startActivity(mapsIntent);
+            }
+
+dari code diatas kita akan memanggil lokasi yang telah dibuatkan barqode,berikut barqode untuk praktek project fungsi MAPs
+
+![qr-code MAPS](https://user-images.githubusercontent.com/92739297/211197978-35592064-f922-41ed-8c35-541eba8d2774.png)
+
+kode barqode diatas menuju lokasi yang telah ditentukan 
+maka
+
+ 
+![Screenshot_MAPS_QRCode](https://user-images.githubusercontent.com/92739297/211198146-2eb38cc4-be81-4f4f-aa79-a2f635ec226d.jpg)
+
+itu kegiatan saat melakukan scan barqode terkait
+
+maka dihasilkan
+
+![Screenshot_Hasil Maps](https://user-images.githubusercontent.com/92739297/211198190-6af9108d-f111-4736-afc6-dbd4d545e1f9.jpg)
+
+gambar di atas akan muncul langsung menuju ke lokasi map yang kita scan secara tepat dan akurat
+
+dari hasil diatas maka kode java yang saya buat berhasil atau sukses dan tidak terjadi error.
+
+
+
+
 
 
 
