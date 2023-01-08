@@ -131,6 +131,254 @@ gambar di atas akan muncul langsung menuju ke lokasi map yang kita scan secara t
 
 dari hasil diatas maka kode java yang saya buat berhasil atau sukses dan tidak terjadi error.
 
+5. FUNGSI  EMAIL
+Dilakukan untuk pemanggilan email agar lebih cepat dan akurat dengan menggunakan barqode, ini akan langsung menuju email terkait saat dilakukannya scan pada barqode APP yang saya buat.
+berikut code java pemanggilan email pada android studio
+ // EMAIL
+            else if (result.getContents().startsWith("mailto:")) {
+                // Barcode merupakan alamat email
+                Intent emailIntent = new Intent(Intent.ACTION_SENDTO);
+                emailIntent.setData(Uri.parse(result.getContents()));
+                emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Subject");
+                emailIntent.putExtra(Intent.EXTRA_TEXT, "Body");
+                if (emailIntent.resolveActivity(getPackageManager()) != null) {
+                    startActivity(emailIntent);
+                }
+
+code diatas untuk pemanggilan email yang di buat barqode,untuk lebih jelasnya saya sudah buat barqode yang digunakan saat praktek project Pemanggilan Email
+
+![qr-code EMAIL](https://user-images.githubusercontent.com/92739297/211198854-353e2dda-338a-4431-afd2-4add3136c3db.png)
+
+saat saya melakukan kegiatan scan seperti gambar dibawah
+
+ 
+![Screenshot_Email scan](https://user-images.githubusercontent.com/92739297/211199195-9287a6d7-928f-4eb1-a0b6-dcadbad59961.jpg)
+
+dengan scan yang dilakukan maka menghasilkan
+
+![Screenshot_Hasil dari melakukan Scan Email](https://user-images.githubusercontent.com/92739297/211199232-484301b5-9503-454d-b7b5-87a2466200db.jpg)
+
+![Screenshot_hasil di email](https://user-images.githubusercontent.com/92739297/211199277-903ad189-9215-4d99-aba7-b4329e6814f9.jpg)
+
+dari kegiatan diatas maka dapat disimpulkan bahwa kode java yang saya buat berhasil dan sukses untuk pemanggilan email secara langsung saat scan barqode yang telah dibuat untuk praktek.
+
+dari penjelasan diatas maka 5 fungsi di project QRCODE APP MOBILE  yang telah dibuat telah terpenuhi dengan code java dan desain yang saya buat
+
+code java keseluruhan
+
+package com.example.qrcode;
+
+
+import android.content.Intent;
+import android.net.Uri;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
+import android.util.Patterns;
+
+import androidx.appcompat.app.AppCompatActivity;
+import com.google.zxing.integration.android.IntentIntegrator;
+import com.google.zxing.integration.android.IntentResult;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+
+    // objek
+    private Button buttonScanning;
+    private TextView textViewName, textViewClass, textViewID;
+
+    // QRCode Scanner
+    private IntentIntegrator qrscan;
+
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        // View
+        buttonScanning = (Button) findViewById(R.id.buttonScan);
+        textViewName = (TextView) findViewById(R.id.textViewNama);
+        textViewClass = (TextView) findViewById(R.id.textViewKelas);
+        textViewID = (TextView) findViewById(R.id.textViewNIM);
+
+        qrscan = new IntentIntegrator(this);
+        buttonScanning.setOnClickListener(this);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
+        if(result != null) {
+            if(result.getContents() == null) {
+                Toast.makeText(this, "Not Scanned", Toast.LENGTH_LONG).show();
+            }
+            // DIAL UP, NOMOR TELEPON
+            else if (Patterns.PHONE.matcher(result.getContents()).matches()) {
+                Intent intent2 = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + result.getContents()));
+                startActivity(intent2);}
+
+            // WEBVIEW
+            else if (Patterns.WEB_URL.matcher(result.getContents()).matches()) {
+                Intent visitUrl = new Intent(Intent.ACTION_VIEW, Uri.parse(result.getContents()));
+                startActivity(visitUrl);
+            }
+            // EMAIL
+            else if (result.getContents().startsWith("mailto:")) {
+                // Barcode merupakan alamat email
+                Intent emailIntent = new Intent(Intent.ACTION_SENDTO);
+                emailIntent.setData(Uri.parse(result.getContents()));
+                emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Subject");
+                emailIntent.putExtra(Intent.EXTRA_TEXT, "Body");
+                if (emailIntent.resolveActivity(getPackageManager()) != null) {
+                    startActivity(emailIntent);
+                }
+            }
+            // MAPS
+            else if (result.getContents().startsWith("geo:")) {
+                // Barcode merupakan koordinat
+                Intent mapsIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(result.getContents()));
+                mapsIntent.setPackage("com.google.android.apps.maps");
+                startActivity(mapsIntent);
+            }
+
+            else {
+
+
+
+                // JSON
+                try {
+
+                    JSONObject jsonObject = new JSONObject(result.getContents());
+                    textViewName.setText(jsonObject.getString("nama"));
+                    textViewClass.setText(jsonObject.getString("kelas"));
+                    textViewID.setText(jsonObject.getString("nim"));
+
+                }  catch (JSONException e){
+                    e.printStackTrace();
+                    Toast.makeText(this, result.getContents(), Toast.LENGTH_LONG).show();
+                }
+
+                Toast.makeText(this, "Scanned : " + result.getContents(), Toast.LENGTH_LONG).show();
+            }
+        } else {
+            super.onActivityResult(requestCode, resultCode, data);
+        }
+    }
+
+    @Override
+    public void onClick(View view) {
+        qrscan.initiateScan();
+    }
+}
+
+
+untuk menjalankan code java diatas memerlukan xml desain android studio yang telah saya buat
+
+berikut codenya
+
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:padding="30dp"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:background="@color/blue">
+
+    <Button
+        android:id="@+id/buttonScan"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="QR CODE SCAN"
+        android:layout_alignParentBottom="true"
+        android:textColor="@color/black"
+        android:layout_marginBottom="50dp"
+        android:backgroundTint="@color/biru"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_centerVertical="true">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Nama :"
+            android:textSize="10pt"
+            android:textColor="@color/black"/>
+
+        <TextView
+            android:id="@+id/textViewNama"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="BAGAS DWI PRASETYO"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Kelas :"
+            android:textSize="10pt"
+            android:textColor="@color/black"/>
+
+        <TextView
+            android:id="@+id/textViewKelas"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:text="TI.21.C5"
+            android:textStyle="bold"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Nim :"
+            android:textSize="10pt"
+            android:textColor="@color/black"/>
+
+        <TextView
+            android:id="@+id/textViewNIM"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="312110053"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"/>
+
+    </LinearLayout>
+</RelativeLayout>
+
+dari code diatas maka menghasilkan app mobile seperti gambar dibawah ini
+
+
+![Screenshot (6)](https://user-images.githubusercontent.com/92739297/211199609-7fc4e923-4862-4035-af66-cc48d7379c8d.png)
+
+selesai project APP MOBILE QR CODE yang saya buat, semoga mengedukasi dan memberikan ilmu pengetahuan yang nyata lagi benar.
+Terima kasih kepada Bapak Dosen Donny Maulana,S.Kom.,M.M.S.I. yang telah membimbing saya dari dasar hingga menjadi project diatas
+Terima kasih kepada rekan mahasiswa yang ikut serta membuat saya bisa sepeti ini,dan Terima kasih kepada diri sendiri yang kuat menghadapi kerasnya dunia ini, semoga bermanfaat
+
+saya
+
+Nama : Bagas Dwi Prasetyo \t
+NIM : 312110053 \t
+Kelas : TI.21.C5
+
+by.mahasiswa hebat
+
+
+
+
 
 
 
