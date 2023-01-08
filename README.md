@@ -27,7 +27,7 @@ code JAVA JSON pada APP QR CODE yang saya buat
 
     berikut ini adalah gambar QR yang saya buat untuk praktek projek JSON
 
-    ![qr-code](https://user-images.githubusercontent.com/92739297/211195372-83cadfc5-9f00-4650-89d2-9a492fd32b7f.png)
+![qr-code](https://user-images.githubusercontent.com/92739297/211195372-83cadfc5-9f00-4650-89d2-9a492fd32b7f.png)
 
     bila gambar diatas discan dengan app yang saya buat maka muncul seperti gambar dibawah
 
