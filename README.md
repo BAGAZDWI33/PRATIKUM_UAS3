@@ -37,7 +37,7 @@ code JAVA JSON pada APP QR CODE yang saya buat
 
     MAKA dinyatakan bahwa fungsi JSON yang saya buat berfungsi dan tidak terjadi error
 
-    ## 2.FUNGSI WEB
+## 2.FUNGSI WEB
     Digunakan untuk menampilkan QR CODE dari link website tertentu yang biasanya digunakan untuk mempermudah pengguna saat pencarian situs terkait
 
     berikut code java untuk WEB
@@ -68,6 +68,37 @@ muncul seperti gambar diatas dan kita pilih maka
 ![Screenshot_Chrome](https://user-images.githubusercontent.com/92739297/211196463-fb59d6e1-c3fe-4bbd-8757-d364de0e0d8b.jpg)
 
 akan muncul sepeti gambar diatas dengan langsung menuju WEB yang ada di dalam barqode tersebut
+
+maka dinyatakan code yang saya buat sukses dan tidak terjadi error
+
+## 3. FUNGSI PHONE 
+digunakan untuk pemanggilan call telephone saat di scan secara langsung
+ini mempermudah dalam pemanggilan nomer telephon secara cepat menggunakan barqode dengan APP yang saya buat.
+
+berikut code java untuk Pemanggilan Call Phone
+
+ // DIAL UP, NOMOR TELEPON
+            else if (Patterns.PHONE.matcher(result.getContents()).matches()) {
+                Intent intent2 = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + result.getContents()));
+                startActivity(intent2);}
+
+dari code diatas dapat kita gunakan untuk melakukan scan barqode memanggil langsung pemilik nomer hp terkait 
+berikut barqode yang telah saya buat untuk praktek project PHONE
+
+ 
+![Screenshot_PHONE_QRCode](https://user-images.githubusercontent.com/92739297/211197351-0ff31fbb-2ba2-4140-b348-646e2c62e672.jpg)
+
+saat saya melakukan scan pada barqode diatas, maka akan menghasilkan 
+
+ 
+![Screenshot_Hasil dari scan PHONE](https://user-images.githubusercontent.com/92739297/211197391-d2743b65-575d-4d84-aacc-8d1154bcbc8f.jpg)
+
+itu tampil secara langsung cepat dan tepat sesuai isi barqode yang saya buat.
+
+maka dari hasil diatas, code java PHONE yang saya buat sukses dan tidak terjadi error.
+
+
+
 
 
 
