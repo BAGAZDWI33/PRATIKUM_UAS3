@@ -365,16 +365,16 @@ dari code diatas maka menghasilkan app mobile seperti gambar dibawah ini
 
 ![Screenshot (6)](https://user-images.githubusercontent.com/92739297/211199609-7fc4e923-4862-4035-af66-cc48d7379c8d.png)
 
-selesai juga project APP MOBILE QR CODE yang saya buat, semoga mengedukasi dan memberikan ilmu pengetahuan yang nyata lagi benar.t\
-Terima kasih kepada Bapak Dosen Donny Maulana,S.Kom.,M.M.S.I. yang telah membimbing saya dari dasar hingga menjadi project diatas. t\
+selesai juga project APP MOBILE QR CODE yang saya buat, semoga mengedukasi dan memberikan ilmu pengetahuan yang nyata lagi benar.
+Terima kasih kepada Bapak Dosen Donny Maulana,S.Kom.,M.M.S.I. yang telah membimbing saya dari dasar hingga menjadi project diatas. 
 
 Terima kasih kepada rekan mahasiswa yang ikut serta membuat saya bisa sepeti ini,dan Terima kasih kepada diri sendiri yang kuat menghadapi kerasnya dunia ini, Terima kasih kepada patner hidup yang selalu membuat segala hal terasa mudah yaitu Orang tua dan yang terkasih (Meli Agustina)semoga bermanfaat
 
 saya
 
-Nama : Bagas Dwi Prasetyo t\
-NIM : 312110053 t\
-Kelas : TI.21.C5 t\
+Nama : Bagas Dwi Prasetyo 
+NIM : 312110053 
+Kelas : TI.21.C5 
 
 by.mahasiswa hebat
 
